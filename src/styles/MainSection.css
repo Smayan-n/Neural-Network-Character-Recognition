@@ -1,0 +1,10 @@
+
+.main-section{
+    display: flex;
+    flex-direction: row;
+    margin: 60px;
+    padding: 40px;
+    background-color: #262430;
+    color: white;
+    height: 100%;
+}

@@ -1,5 +1,6 @@
 import * as onnx from "onnxjs";
 import React, { useEffect } from "react";
+import MainSection from "./components/MainSection";
 import model from "./models/model.onnx";
 
 function App() {
@@ -11,7 +12,12 @@ function App() {
 		const outputTensor = outputMap.values().next().value;
 		console.log(outputTensor.data);
 	}
-	return <div></div>;
+
+	return (
+		<>
+			<MainSection></MainSection>
+		</>
+	);
 }
 
 export default App;
