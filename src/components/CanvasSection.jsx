@@ -86,11 +86,16 @@ function CanvasSection(props) {
 
 	//callback function that runs when mouse button is pressed and mouse is moving on canvas
 	//loop function
-	function handleDraw(ctx, point, prevPoint) {
+	function handleDraw(ctx, point, prevPoint, rightClick) {
 		prevPoint = prevPoint ? prevPoint : point;
 		const points = interpolate(prevPoint, point, 0.075);
 		points.forEach((point) => {
-			drawPixel(ctx, point);
+			//erase if right click
+			if (rightClick) {
+				erasePixel(ctx, point);
+			} else {
+				drawPixel(ctx, point, false);
+			}
 		});
 
 		//callback function to parent component
@@ -115,12 +120,23 @@ function CanvasSection(props) {
 		return pixelArray;
 	}
 
+	function erasePixel(ctx, point) {
+		const simpleCanvas = new SimpleCanvas(ctx);
+		const pixel = getPixelAtPos(point);
+		simpleCanvas.rect(pixel.x, pixel.y, pixelSizeRef.current, pixelSizeRef.current, "", "black");
+
+		const surrPixels = getSurroundingPixels(point);
+		surrPixels.forEach((pixel) => {
+			simpleCanvas.rect(pixel.x, pixel.y, pixelSizeRef.current, pixelSizeRef.current, "", "black");
+		});
+	}
+
 	function drawPixel(ctx, point) {
 		const simpleCanvas = new SimpleCanvas(ctx);
 		const max_intensity = 255;
 		const mid1_intensity = 180;
 		const mid2_intensity = 128;
-		const min_intensity = 20;
+		const min_intensity = 0;
 
 		const pixel = getPixelAtPos(point);
 		let intensity = getPixelIntensity(max_intensity, mid1_intensity, pixel, point, ctx, false);
@@ -161,6 +177,7 @@ function CanvasSection(props) {
 		if (surroundingPixel) if (newIntensity > minIntensity) newIntensity = minIntensity;
 
 		if (intensity < newIntensity) intensity = newIntensity;
+
 		return intensity;
 	}
 
@@ -214,6 +231,10 @@ function CanvasSection(props) {
 				onMouseMove={onMouseMove}
 				ref={setRef}
 				className="canvas"
+				onContextMenu={(e) => {
+					e.preventDefault();
+					e.stopPropagation();
+				}}
 			></canvas>
 		</section>
 	);

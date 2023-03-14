@@ -5,3 +5,6 @@
     background-color: black;
 
 }
+.canvas:hover{
+    cursor: crosshair;
+}

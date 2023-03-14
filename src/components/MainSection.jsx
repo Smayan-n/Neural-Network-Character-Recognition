@@ -41,6 +41,7 @@ function MainSection() {
 				></CanvasSection>
 				<OutputSection recognizer={recognizer} pixelArray={pixelArray}></OutputSection>
 			</section>
+			<div className="input-info">Left Click: Draw &nbsp;|&nbsp; Right Click: Erase</div>
 		</section>
 	);
 }

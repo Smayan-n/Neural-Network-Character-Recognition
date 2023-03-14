@@ -131,7 +131,7 @@ function OutputSection(props) {
 
 	return (
 		<section className="output-section">
-			<div className="prediction-container">
+			<div className="predictions-container">
 				{output
 					? formattedOutput(true)
 							.splice(0, 10)

@@ -5,6 +5,7 @@ function useOnDraw(onDraw) {
 	//use ref does not trigger re-render when value is changed
 	const canvasRef = useRef(null);
 	const mouseDownRef = useRef(false);
+	const mouseButtonRef = useRef(null);
 	const prevPosRef = useRef(null);
 
 	const mouseUpListenerRef = useRef(null);
@@ -35,6 +36,8 @@ function useOnDraw(onDraw) {
 	};
 
 	const onMouseDown = (e) => {
+		//e.button - 0: left, 2: right
+		mouseButtonRef.current = e.button;
 		mouseDownRef.current = true;
 		onMouseMove(e);
 	};
@@ -43,7 +46,7 @@ function useOnDraw(onDraw) {
 		const point = getPointOnCanvas(e.clientX, e.clientY);
 		if (mouseDownRef.current) {
 			const ctx = canvasRef.current.getContext("2d", { willReadFrequently: true });
-			onDraw(ctx, point, prevPosRef.current);
+			onDraw(ctx, point, prevPosRef.current, mouseButtonRef.current === 2 ? true : false);
 			prevPosRef.current = point;
 		}
 	};

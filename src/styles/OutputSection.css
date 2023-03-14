@@ -3,7 +3,7 @@
     font-size: 2.5vw;
 }
 
-.prediction-container{
+.predictions-container{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -39,5 +39,5 @@
 .prediction-percentage{
     font-size: 2vw;
     color: white;
-    margin-left: 5px;
+    margin-left: 10px;
 }
