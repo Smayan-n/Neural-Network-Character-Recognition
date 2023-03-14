@@ -1,16 +1,7 @@
 .canvas-section{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-}
-
-.grid-pixel{
-    /* border: 1px solid red; */
-    background-color: black;
-    height: 1.5vw;
-    width: 1.5vw;
 }
 
 .canvas{
     background-color: black;
- 
+
 }

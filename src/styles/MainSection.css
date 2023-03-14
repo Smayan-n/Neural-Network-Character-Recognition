@@ -1,10 +1,36 @@
 
 .main-section{
     display: flex;
-    flex-direction: row;
-    margin: 60px;
+    flex-direction: column;
+    justify-content: center;
+    gap: 25px;
+    margin: 40px;
     padding: 40px;
+    height: 100%;
     background-color: #262430;
     color: white;
+}
+
+.recognizer-section{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 25px;
     height: 100%;
+    color: white;
+}
+
+.clear-btn{
+    /* background-color: #2e2c38; */
+    background-color: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 20vw;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 2vw;
+}
+.clear-btn:hover{
+    opacity: 0.8;
 }

@@ -11,13 +11,16 @@ function useOnDraw(onDraw) {
 
 	useEffect(() => {
 		//setup mouseUp listener on window
-		const mouseUpListener = (e) => {
-			mouseDownRef.current = false;
-			//reset prevPoint
-			prevPosRef.current = null;
-		};
-		mouseUpListenerRef.current = mouseUpListener;
-		window.addEventListener("mouseup", mouseUpListener);
+		function initMouseUpListener() {
+			const mouseUpListener = (e) => {
+				mouseDownRef.current = false;
+				//reset prevPoint
+				prevPosRef.current = null;
+			};
+			mouseUpListenerRef.current = mouseUpListener;
+			window.addEventListener("mouseup", mouseUpListener);
+		}
+		initMouseUpListener();
 
 		return () => {
 			//cleanup listener on unmount
@@ -33,6 +36,7 @@ function useOnDraw(onDraw) {
 
 	const onMouseDown = (e) => {
 		mouseDownRef.current = true;
+		onMouseMove(e);
 	};
 
 	const onMouseMove = (e) => {
