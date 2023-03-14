@@ -31,10 +31,13 @@
 .prediction-bar-out{
     display: flex;
     align-items: center;
-    padding-left: 5px;
+    /* padding-left: 5px; */
     height: 100%;
     z-index: 100;
+    background-color: green;
+}
+.prediction-percentage{
     font-size: 2vw;
     color: white;
-    background-color: green;
+    margin-left: 5px;
 }

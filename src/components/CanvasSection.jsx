@@ -14,7 +14,8 @@ function CanvasSection(props) {
 	const canvasRef = useRef(null);
 
 	//array that stores top-left positions of pixels in the 28x28 grid
-	const [pixelPositions, setPixelPositions] = useState(null);
+	const [pixels, setPixels] = useState(null);
+	const [pixelArray, setPixelArray] = useState(null);
 	//pixel size
 	const pixelSizeRef = useRef(getCanvasSize() / 28);
 
@@ -36,13 +37,15 @@ function CanvasSection(props) {
 				canvas.width = size;
 				canvas.height = size;
 				pixelSizeRef.current = size / 28;
-				setupPixelPositions();
+				setupPixels();
+				//to re-render output display
+				onInputChange(getPixelArray(null));
 			}
 		};
 		windowResizeListenerRef.current = windowResizeListener;
 		window.addEventListener("resize", windowResizeListener);
 
-		setupPixelPositions();
+		setupPixels();
 
 		return () => {
 			//TODO: Cleanup!!
@@ -58,26 +61,27 @@ function CanvasSection(props) {
 
 	//returns canvas size depending on window width
 	function getCanvasSize() {
-		const winWidth = Math.floor(window.innerWidth / 2.3);
+		const winWidth = Math.floor(window.innerWidth / 2.6);
 		const rem = winWidth % 28;
 		const canvasSize = winWidth - rem;
 		return canvasSize;
 	}
 
-	function setupPixelPositions() {
+	//sets up pixels - positions and intensity
+	function setupPixels() {
 		//set up empty 28x28 array
-		const pixels = new Array(28);
+		const newPixels = new Array(28);
 		for (let i = 0; i < 28; i++) {
-			pixels[i] = new Array(28);
+			newPixels[i] = new Array(28);
 		}
 
 		//store top-left positions of pixels in array
 		for (let row = 0; row < 28; row += 1) {
 			for (let col = 0; col < 28; col += 1) {
-				pixels[row][col] = { x: col * pixelSizeRef.current, y: row * pixelSizeRef.current };
+				newPixels[row][col] = { x: col * pixelSizeRef.current, y: row * pixelSizeRef.current };
 			}
 		}
-		setPixelPositions(pixels);
+		setPixels(newPixels);
 	}
 
 	//callback function that runs when mouse button is pressed and mouse is moving on canvas
@@ -95,22 +99,19 @@ function CanvasSection(props) {
 
 	function getPixelArray(ctx) {
 		const pixelArray = [];
-		pixelPositions.forEach((row) => {
-			const rows = [];
-			row.forEach((pixel) => {
-				const pixelCenter = getPixelCenter(pixel);
-				const intensity = ctx.getImageData(pixelCenter.x, pixelCenter.y, 1, 1).data[0];
-				const normalized = (intensity / 255 - 0.1307) / 0.3081;
-				rows.push(normalized);
+		if (ctx) {
+			pixels.forEach((row) => {
+				const rows = [];
+				row.forEach((pixel) => {
+					const pixelCenter = getPixelCenter(pixel);
+					const intensity = ctx.getImageData(pixelCenter.x, pixelCenter.y, 1, 1).data[0];
+					//normalize pixel intensity
+					const normalized = (intensity / 255 - 0.1307) / 0.3081;
+					rows.push(normalized);
+				});
+				pixelArray.push(rows);
 			});
-			pixelArray.push(rows);
-		});
-		// const dilated = dilate2DArray(pixelArray);
-		// for (let r = 0; r < dilated.length; r++) {
-		// 	for (let c = 0; c < dilated[r].length; c++) {
-		// 		dilated[r][c] = (dilated[r][c] / 255 - 0.1307) / 0.3081;
-		// 	}
-		// }
+		}
 		return pixelArray;
 	}
 
@@ -167,16 +168,16 @@ function CanvasSection(props) {
 		const surrPixels = [];
 		const { rowIndex, colIndex } = getPixelIndices(point);
 		if (colIndex + 1 <= 27) {
-			surrPixels.push(pixelPositions[rowIndex][colIndex + 1]);
+			surrPixels.push(pixels[rowIndex][colIndex + 1]);
 		}
 		if (rowIndex + 1 <= 27) {
-			surrPixels.push(pixelPositions[rowIndex + 1][colIndex]);
+			surrPixels.push(pixels[rowIndex + 1][colIndex]);
 		}
 		if (colIndex - 1 >= 0) {
-			surrPixels.push(pixelPositions[rowIndex][colIndex - 1]);
+			surrPixels.push(pixels[rowIndex][colIndex - 1]);
 		}
 		if (rowIndex - 1 >= 0) {
-			surrPixels.push(pixelPositions[rowIndex - 1][colIndex]);
+			surrPixels.push(pixels[rowIndex - 1][colIndex]);
 		}
 
 		return surrPixels;
@@ -185,7 +186,7 @@ function CanvasSection(props) {
 	//returns a pixel at given x, y coord
 	function getPixelAtPos(point) {
 		const indices = getPixelIndices(point);
-		return pixelPositions[indices.rowIndex][indices.colIndex];
+		return pixels[indices.rowIndex][indices.colIndex];
 	}
 
 	function getPixelIndices(point) {

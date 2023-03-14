@@ -3,19 +3,27 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 25px;
-    margin: 40px;
+    gap: 30px;
+    margin: 30px;
     padding: 40px;
     height: 100%;
-    background-color: #262430;
+    background-color: #272531;
     color: white;
+}
+
+.main-btn-section{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .recognizer-section{
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 25px;
+    gap: 35px;
     height: 100%;
     color: white;
 }
@@ -26,11 +34,24 @@
     color: white;
     border: none;
     cursor: pointer;
-    width: 20vw;
     border-radius: 5px;
     padding: 10px;
     font-size: 2vw;
+    flex-basis: 25%;
 }
-.clear-btn:hover{
+
+.switch-recognizer-btn{
+    background-color: rgb(28, 165, 229);
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 2vw;
+    flex-basis: 32%;
+
+}
+
+button:hover{
     opacity: 0.8;
 }
