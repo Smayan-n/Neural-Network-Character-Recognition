@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/Neural-Network-Character-Recognition/static/css/main.f9924f0f.css",
+    "main.js": "/Neural-Network-Character-Recognition/static/js/main.ef68d804.js",
+    "static/js/787.6a215fe6.chunk.js": "/Neural-Network-Character-Recognition/static/js/787.6a215fe6.chunk.js",
+    "static/media/letter_model.onnx": "/Neural-Network-Character-Recognition/static/media/letter_model.8d64db6a38a63e313b16.onnx",
+    "static/media/digit_model.onnx": "/Neural-Network-Character-Recognition/static/media/digit_model.e5393d21e4e42923523b.onnx",
+    "index.html": "/Neural-Network-Character-Recognition/index.html",
+    "main.f9924f0f.css.map": "/Neural-Network-Character-Recognition/static/css/main.f9924f0f.css.map",
+    "main.ef68d804.js.map": "/Neural-Network-Character-Recognition/static/js/main.ef68d804.js.map",
+    "787.6a215fe6.chunk.js.map": "/Neural-Network-Character-Recognition/static/js/787.6a215fe6.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f9924f0f.css",
+    "static/js/main.ef68d804.js"
+  ]
+}
