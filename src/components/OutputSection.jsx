@@ -1,5 +1,6 @@
 import * as onnx from "onnxjs";
 import { useEffect, useRef, useState } from "react";
+import cnnDigitModel from "../models/cnn_digit_model.onnx";
 import digitModel from "../models/digit_model.onnx";
 import letterModel from "../models/letter_model.onnx";
 import "../styles/OutputSection.css";
@@ -49,6 +50,8 @@ const digitMap = {
 function OutputSection(props) {
 	const { recognizer, pixelArray } = props;
 	const [output, setOutput] = useState(null);
+
+	const [isSessionInitialized, setIsSessionInitialized] = useState(false);
 	const sessionRef = useRef(null);
 
 	//only runs when component first mounts and when the recognizer changes
@@ -57,22 +60,32 @@ function OutputSection(props) {
 		async function initializeInferenceSession() {
 			//make a onnx inference session
 			sessionRef.current = new onnx.InferenceSession();
+			//loadModel returns a promise that has to be resolved
 			if (recognizer === "Digit") {
-				await sessionRef.current.loadModel(digitModel);
+				await sessionRef.current.loadModel(cnnDigitModel);
 			} else {
 				await sessionRef.current.loadModel(letterModel);
 			}
+			setIsSessionInitialized(true);
 		}
 		initializeInferenceSession();
 	}, [recognizer]);
 
-	//runs when pixelArray changes and recognizer changes
+	//runs when pixelArray changes
 	//NOTE: fix session not initialized error
 	useEffect(() => {
 		async function predict() {
-			if (sessionRef.current && pixelArray && pixelArray.length !== 0) {
+			if (isSessionInitialized && pixelArray && pixelArray.length !== 0) {
 				//convert pixelArray to tensor
-				const inputTensor = new onnx.Tensor(pixelArray.flat(), "float32", [1, 784]);
+				const input = pixelArray.flat();
+				let inputTensor;
+				if (recognizer === "Digit") {
+					inputTensor = new onnx.Tensor(input, "float32", [1, 1, 28, 28]);
+				} else {
+					inputTensor = new onnx.Tensor(input, "float32", [1, 784]);
+				}
+
+				//run inference
 				const outputMap = await sessionRef.current.run([inputTensor]);
 				const outputTensor = outputMap.values().next().value;
 				const outputArr = Array.from(outputTensor.data);
@@ -85,9 +98,8 @@ function OutputSection(props) {
 				setOutput(out);
 			}
 		}
-
 		predict();
-	}, [pixelArray, recognizer]);
+	}, [pixelArray]);
 
 	function formattedOutput(sort = false) {
 		//returns output object as an array with [key, value] elements - with optional sort

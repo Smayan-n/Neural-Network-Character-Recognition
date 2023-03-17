@@ -15,18 +15,17 @@ function CanvasSection(props) {
 
 	//array that stores top-left positions of pixels in the 28x28 grid
 	const [pixels, setPixels] = useState(null);
-	const [pixelArray, setPixelArray] = useState(null);
 	//pixel size
 	const pixelSizeRef = useRef(getCanvasSize() / 28);
 
-	//effect that checks if clearCanvas prop from parent is true and clear canvas
+	//effect that checks if clearCanvas prop from parent is true and clears canvas
 	useEffect(() => {
 		if (clearCanvas) {
 			const ctx = canvasRef.current.getContext("2d");
 			ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
 			onClearCanvas();
 		}
-	});
+	}, [clearCanvas, onClearCanvas]);
 
 	//effect sets up resize listener and initializes pixelPositions
 	useEffect(() => {
@@ -61,7 +60,7 @@ function CanvasSection(props) {
 
 	//returns canvas size depending on window width
 	function getCanvasSize() {
-		const winWidth = Math.floor(window.innerWidth / 2.6);
+		const winWidth = Math.floor(window.innerWidth / 2.7);
 		const rem = winWidth % 28;
 		const canvasSize = winWidth - rem;
 		return canvasSize;
