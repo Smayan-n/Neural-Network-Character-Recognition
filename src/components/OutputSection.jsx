@@ -77,7 +77,8 @@ function OutputSection(props) {
 		async function predict() {
 			if (isSessionInitialized && pixelArray && pixelArray.length !== 0) {
 				//convert pixelArray to tensor
-				const input = pixelArray.flat();
+				let input = pixelArray.flat();
+				input = normalizeInput(input);
 				let inputTensor;
 				if (recognizer === "Digit") {
 					inputTensor = new onnx.Tensor(input, "float32", [1, 1, 28, 28]);
@@ -100,6 +101,14 @@ function OutputSection(props) {
 		}
 		predict();
 	}, [pixelArray]);
+
+	function normalizeInput(input) {
+		//normalize input depending on model
+		// if (recognizer === "Digit") return input.map((val) => (val / 255 - 0.1307) / 0.3081);
+		// else return input.map((val) => (val / 255 - 0.5) / 0.5);
+		//NOTE: for some reason this normalization works best for letter and digit model
+		return input.map((val) => (val / 255 - 0.1307) / 0.3081);
+	}
 
 	function formattedOutput(sort = false) {
 		//returns output object as an array with [key, value] elements - with optional sort

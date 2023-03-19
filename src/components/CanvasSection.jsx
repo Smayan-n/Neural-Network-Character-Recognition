@@ -109,9 +109,7 @@ function CanvasSection(props) {
 				row.forEach((pixel) => {
 					const pixelCenter = getPixelCenter(pixel);
 					const intensity = ctx.getImageData(pixelCenter.x, pixelCenter.y, 1, 1).data[0];
-					//normalize pixel intensity - NOTE TODO:has to be different for letters(0.5)!!!
-					const normalized = (intensity / 255 - 0.1307) / 0.3081;
-					rows.push(normalized);
+					rows.push(intensity);
 				});
 				pixelArray.push(rows);
 			});
