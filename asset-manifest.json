@@ -1,18 +1,18 @@
 {
   "files": {
     "main.css": "/Neural-Network-Character-Recognition/static/css/main.7530d544.css",
-    "main.js": "/Neural-Network-Character-Recognition/static/js/main.fa1d8d19.js",
+    "main.js": "/Neural-Network-Character-Recognition/static/js/main.1ba37325.js",
     "static/js/787.6a215fe6.chunk.js": "/Neural-Network-Character-Recognition/static/js/787.6a215fe6.chunk.js",
     "static/media/cnn_digit_model.onnx": "/Neural-Network-Character-Recognition/static/media/cnn_digit_model.e7d2a7365cc2eb167ab8.onnx",
     "static/media/letter_model.onnx": "/Neural-Network-Character-Recognition/static/media/letter_model.8d64db6a38a63e313b16.onnx",
     "static/media/digit_model.onnx": "/Neural-Network-Character-Recognition/static/media/digit_model.e5393d21e4e42923523b.onnx",
     "index.html": "/Neural-Network-Character-Recognition/index.html",
     "main.7530d544.css.map": "/Neural-Network-Character-Recognition/static/css/main.7530d544.css.map",
-    "main.fa1d8d19.js.map": "/Neural-Network-Character-Recognition/static/js/main.fa1d8d19.js.map",
+    "main.1ba37325.js.map": "/Neural-Network-Character-Recognition/static/js/main.1ba37325.js.map",
     "787.6a215fe6.chunk.js.map": "/Neural-Network-Character-Recognition/static/js/787.6a215fe6.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.7530d544.css",
-    "static/js/main.fa1d8d19.js"
+    "static/js/main.1ba37325.js"
   ]
 }
