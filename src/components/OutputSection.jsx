@@ -160,11 +160,11 @@ function OutputSection(props) {
 								const [key, value] = entry;
 								return getOutputJsx(key, value);
 							})
-					: Object.keys(recognizer === "Digit" ? digitMap : letterMap)
-							.splice(0, 10)
-							.map((key) => {
+					: (recognizer === "Digit" ? Object.keys(digitMap) : Object.keys(letterMap).splice(1, 10)).map(
+							(key) => {
 								return getOutputJsx(key, 0);
-							})}
+							}
+					  )}
 			</div>
 		</section>
 	);
