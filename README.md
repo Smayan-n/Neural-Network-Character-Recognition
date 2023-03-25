@@ -1,5 +1,13 @@
-A React application that features 2 independent neural networks that can perform live, hand-drawn digit and letter recognition.
+Welcome to the Neural-Network-Character-Recognition GitHub repository! 
+This react application allows you to hand-draw digits and letters from the english alphabet while a neural network actively guesses your work.
 
-The digit model was trained using a convolutional neural network while the letter model was trained using a regular, fully connected network.
+# Features: #
+* features 2 independent neural networks that can perform live, hand-drawn digit and letter recognition
+* the digit model was trained in PyTorch using a convolutional neural network - more that 92% accurate
+* the letter model was trained in PyTorch using a regular, fully connected neural network - less accurate that the digit model (around 80%)
 
-View the live build here: https://smayan-n.github.io/Neural-Network-Character-Recognition/
+
+# Usage: #
+* visit the github page for this repo: https://smayan-n.github.io/Neural-Network-Character-Recognition/
+* Download or clone this repository and open the `index.html` file
+
