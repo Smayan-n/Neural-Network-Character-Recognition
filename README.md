@@ -9,6 +9,6 @@ This react application allows you to hand-draw digits and letters from the engli
 
 # Usage: #
 * visit the github page for this repo: https://smayan-n.github.io/Neural-Network-Character-Recognition/
-* Download or clone this repository and open the `index.html` file
+* Download or clone this repository
 
 ![image](https://user-images.githubusercontent.com/86111841/227735974-25cc2624-7b8e-4c7d-9d7a-3521cfeea7dd.png)
